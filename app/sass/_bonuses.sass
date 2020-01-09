@@ -1,22 +1,26 @@
 .bonuses
     background: $gray
     padding-top: 100px
+    display: grid
+    grid-template-columns: 1fr 1fr
+    grid-gap: 30px
+    @media (max-width: 1012px)
+        grid-template-columns: 1fr 
     .subscribe
         background: $accent        
         color: #fff
-        margin-right: 30px
-        margin-left: 8px
-        h4
-            margin-top: 30px
-        p
-            font-weight: normal
-            font-size: 14px
-            line-height: 20px
-            margin: $gutter 0
+        display: flex 
+        align-items: center
+        justify-content: space-between
+        padding: 40px       
         .subscribe-text
-            margin-left: 20px
-            width: 250px
-            display: inline-block
+            position: relative            
+            width: 250px  
+            p
+                font-weight: normal
+                font-size: 14px
+                line-height: 20px
+                margin: $gutter 0            
             .email
                 border-radius: 30px
                 background: #fff
@@ -27,43 +31,33 @@
                 &::placeholder
                     font-size: 14px
                     line-height: 16px
-                    color: #C4C4C4
-                    
-        .icon
-            display: inline-block
-            position: absolute
-            right: 10%
-            top: 23%
-.shops-info
-    margin-top: 30px
-    margin-left: 30px
-    h4
-        margin-bottom: 20px
-    p
-        width: 200px
-        font-weight: normal
-        font-size: 14px
-        line-height: 20px        
-.our-shops
-    background: $accent
-    height: 212px
-    color: #fff
-    margin-right: -10px
-    position: relative
-.btn-map
-    color: #ffffff
-    border: 2px solid #ffffff
-    border-radius: 30px
-    width: 170px
-    height: 35px
-    display: block
-    text-align: center
-    padding-top: 3px    
-.icon-shop
-    display: block
-    position: absolute
-    top: 25%
-    right: 10%
+                    color: #C4C4C4 
+    .our-shops
+        background: $accent
+        height: 100%
+        color: #fff
+        display: flex 
+        align-items: center
+        justify-content: space-between
+        padding: 40px
+        .shops-info            
+            h4
+                margin-bottom: 20px
+            p
+                width: 200px
+                font-weight: normal
+                font-size: 14px
+                line-height: 20px 
+        .btn-map
+            color: #ffffff
+            border: 2px solid #ffffff
+            border-radius: 30px
+            width: 170px
+            height: 35px
+            display: block
+            text-align: center
+            padding-top: 3px   
+        
 
 
 
@@ -72,9 +66,17 @@
 .brands
     padding-top: 100px
     background: $gray
-    margin-left: 12px
+    display: flex 
+    flex-wrap: wrap
+     
 .brend
-    text-align: center
+    display: flex
+    align-items: center
+    justify-content: center
+    width: 25%
     border: 1px solid $gray
-    background: #fff
-    padding: 35px 60px
+    height: 150px
+    background-color: #fff
+    @media (max-width: 900px)
+        width: 33%
+

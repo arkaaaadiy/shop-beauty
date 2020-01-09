@@ -1,39 +1,49 @@
-.products
-    width: 100vw
-    background: $gray
+.products    
     padding-top: 80px
     position: relative
     z-index: 5
 h2
     width: 100%
     
+.product__inner
+    margin-top: 38px
+    display: flex
+    justify-content: space-between    
 .card
-    background: #fff
-    width: 255px    
-    text-align: center
-    margin-right: 30px
-    margin-bottom: 80px
+    background: #fff    
+    padding: 25px 30px   
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    align-items: center
+    margin-right: 30px   
     &:last-child
-        margin-right: 0
-    img
-        margin-top: 25px
+        margin-right: 0 
+    @media (max-width: 940px)
+        &:nth-child(3)
+            margin-right: 0
+        &:last-child
+            display: none                
     .price
-        font-weight: 500
+        font-weight: 700
         font-size: 21px
         line-height: 25px
         letter-spacing: 0.05em
         color: #000
-        margin-top: $gutter
+        margin-bottom: 20px
     p
-        margin-top: $gutter
+        margin: 20px 0
+        text-align: center
+        
     .btn-prod
         font-weight: normal
         font-size: 14px
         line-height: 16px
         color: #fff
+        text-align: center
         background: $accent
         border-radius: 30px
         width: 130px
         height: 35px
-        margin: $gutter auto
+        margin: 0 auto       
         padding: 9px        
