@@ -39,11 +39,18 @@
     justify-content: space-between
     font-size: 12px
     line-height: 14px
-    text-align: right
-    height: 64px
+    text-align: right    
     padding: 25px 0
     color: #828282
     a
         color: #828282
+    @media (max-width: 820px)
+        text-align: left
+    @media (max-width: 430px)
+        flex-direction: column
+    .copy-right
+        white-space: nowrap
+        @media (max-width: 430px)
+            margin-top: 10px
 .bg-copyright
     background: $gray

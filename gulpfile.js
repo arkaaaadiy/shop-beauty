@@ -1,6 +1,6 @@
 var gulp         = require('gulp'),
 		sass         = require('gulp-sass'),
-		browserSync  = require('browser-sync'),
+		browserSync  = require('browser-sync').create(),
 		concat       = require('gulp-concat'),
 		uglify       = require('gulp-uglify-es').default,
 		cleancss     = require('gulp-clean-css'),
@@ -13,7 +13,7 @@ var gulp         = require('gulp'),
 
 // Local Server
 gulp.task('browser-sync', function() {
-	browserSync({
+	browserSync.init({
 		server: {
 			baseDir: 'app'
 		},
@@ -27,7 +27,10 @@ function bsReload(done) { browserSync.reload(); done(); };
 // Custom Styles
 gulp.task('styles', function() {
 	return gulp.src('app/sass/**/*.sass')
-	.pipe(sass({ outputStyle: 'expanded' }))
+	.pipe(sass({
+		outputStyle: 'expanded',
+		includePaths: [__dirname + '/node_modules']
+	}))
 	.pipe(concat('styles.min.css'))
 	.pipe(autoprefixer({
 		grid: true,
@@ -42,32 +45,39 @@ gulp.task('styles', function() {
 gulp.task('scripts', function() {
 	return gulp.src([
 		// 'node_modules/jquery/dist/jquery.min.js', // Optional jQuery plug-in (npm i --save-dev jquery)
-		'app/js/_lazy.js', // JS library plug-in example
+		'app/js/_libs.js', // JS libraries (all in one)
 		'app/js/_custom.js', // Custom scripts. Always at the end
 		])
 	.pipe(concat('scripts.min.js'))
-	.pipe(uglify()) // Mifify js (opt.)
+	.pipe(uglify()) // Minify js (opt.)
 	.pipe(gulp.dest('app/js'))
 	.pipe(browserSync.reload({ stream: true }))
 });
 
 // Responsive Images
-gulp.task('img-responsive', async function() {
+var quality = 95; // Responsive images quality
+
+// Produce @1x images
+gulp.task('img-responsive-1x', async function() {
 	return gulp.src('app/img/_src/**/*.{png,jpg,jpeg,webp,raw}')
 		.pipe(newer('app/img/@1x'))
 		.pipe(responsive({
-			'*': [{
-				// Produce @2x images
-				width: '100%', quality: 90, rename: { prefix: '@2x/', },
-			}, {
-				// Produce @1x images
-				width: '50%', quality: 90, rename: { prefix: '@1x/', }
-			}]
-		})).on('error', function () { console.log('No matching images found') })
+			'**/*': { width: '50%', quality: quality }
+		})).on('error', function (e) { console.log(e) })
 		.pipe(rename(function (path) {path.extname = path.extname.replace('jpeg', 'jpg')}))
-		.pipe(gulp.dest('app/img'))
+		.pipe(gulp.dest('app/img/@1x'))
 });
-gulp.task('img', gulp.series('img-responsive', bsReload));
+// Produce @2x images
+gulp.task('img-responsive-2x', async function() {
+	return gulp.src('app/img/_src/**/*.{png,jpg,jpeg,webp,raw}')
+		.pipe(newer('app/img/@2x'))
+		.pipe(responsive({
+			'**/*': { width: '100%', quality: quality }
+		})).on('error', function (e) { console.log(e) })
+		.pipe(rename(function (path) {path.extname = path.extname.replace('jpeg', 'jpg')}))
+		.pipe(gulp.dest('app/img/@2x'))
+});
+gulp.task('img', gulp.series('img-responsive-1x', 'img-responsive-2x', bsReload));
 
 // Clean @*x IMG's
 gulp.task('cleanimg', function() {
@@ -98,7 +108,7 @@ gulp.task('rsync', function() {
 
 gulp.task('watch', function() {
 	gulp.watch('app/sass/**/*.sass', gulp.parallel('styles'));
-	gulp.watch(['libs/**/*.js', 'app/js/_custom.js'], gulp.parallel('scripts'));
+	gulp.watch(['app/js/_custom.js', 'app/js/_libs.js'], gulp.parallel('scripts'));
 	gulp.watch('app/*.html', gulp.parallel('code'));
 	gulp.watch('app/img/_src/**/*', gulp.parallel('img'));
 });

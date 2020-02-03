@@ -8,7 +8,14 @@ h2
 .product__inner
     margin-top: 38px
     display: flex
-    justify-content: space-between    
+    justify-content: space-between
+    @media (max-width: 670px)
+        display: grid
+        grid-template-columns: 1fr 1fr
+        grid-template-rows: 1fr 1fr
+        grid-gap: 30px
+    @media (max-width: 420px)
+        grid-template-columns: 1fr
 .card
     background: #fff    
     padding: 25px 30px   
@@ -23,7 +30,14 @@ h2
         &:nth-child(3)
             margin-right: 0
         &:last-child
-            display: none                
+            display: none  
+    @media (max-width: 670px)
+        margin: 0
+        &:last-child
+            display: flex
+    @media (max-width: 450px)
+        padding: 21px 16px
+    
     .price
         font-weight: 700
         font-size: 21px

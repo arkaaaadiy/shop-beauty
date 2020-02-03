@@ -12,7 +12,13 @@
         display: flex 
         align-items: center
         justify-content: space-between
-        padding: 40px       
+        padding: 40px
+        @media (max-width: 500px)
+            padding: 24px  
+        @media (max-width: 475px)
+            flex-direction: column  
+            .icon
+                margin-top: 10px   
         .subscribe-text
             position: relative            
             width: 250px  
@@ -40,6 +46,12 @@
         align-items: center
         justify-content: space-between
         padding: 40px
+        @media (max-width: 500px)
+            padding: 24px
+        @media (max-width: 475px)
+            flex-direction: column 
+            .icon-shop
+                margin-top: 10px 
         .shops-info            
             h4
                 margin-bottom: 20px
@@ -57,11 +69,6 @@
             display: block
             text-align: center
             padding-top: 3px   
-        
-
-
-
-
 
 .brands
     padding-top: 100px
@@ -79,4 +86,5 @@
     background-color: #fff
     @media (max-width: 900px)
         width: 33%
-
+    @media (max-width: 880px)
+        width: 50%
