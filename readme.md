@@ -1,6 +1,6 @@
 <h1>BEAUTY SHOP</h1>
 <p>Стандартная верстка</p>
-
+<p>https://arkaaaadiy.github.io/shop-beauty/app</p>
 <p>Для ускорения работы использовался - <strong>OptimizedHTML 5</strong> В нем присутсвует <strong>Gulp 4</strong>, <strong>Sass</strong>, <strong>Browsersync</strong>, <strong>Autoprefixer</strong>, <strong>Uglify-ES</strong>, <strong>Clean-CSS</strong>, <strong>Rsync</strong>, <strong>CSS Reboot</strong> (Bootstrap reboot). It uses best practices for <strong>responsive images</strong> optimizing and contains a <strong>.htaccess</strong> file for resources caching (images, fonts, HTML, CSS, JS and other content types).</p>
 
 <h2>Main Gulp tasks:</h2>
